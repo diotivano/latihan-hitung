@@ -12,7 +12,7 @@
   var HIGH_TABLES = [6, 7, 8, 9];
   var HARD_FACTORS = [12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29];
   var VALID_COUNTS = [10, 20, 30];
-  var VALID_TMODES = { low: 1, high: 1, hard: 1, custom: 1 };
+  var VALID_TMODES = { low: 1, high: 1, all: 1, hard: 1, custom: 1 };
   var RNG = { 1: [2, 10], 2: [11, 99], 3: [100, 999] };
   var MAX_Q_MS = 120000;
   var MAX_DIGITS = 5;
@@ -38,10 +38,15 @@
     if (a === b) { if (b > r[0]) b--; else a++ }
     return mk("−", a, b);
   }
+  function tablesForMode(c) {
+    return c.tMode === "low" ? LOW_TABLES
+      : c.tMode === "high" ? HIGH_TABLES
+        : c.tMode === "all" ? ALL_TABLES
+          : c.tables;
+  }
   function gMul(c) {
     if (c.tMode === "hard") return mk("×", pick(HARD_FACTORS), rnd(3, 9));
-    var tb = c.tMode === "low" ? LOW_TABLES : c.tMode === "high" ? HIGH_TABLES : c.tables;
-    var a = pick(tb);
+    var a = pick(tablesForMode(c));
     var b = c.tMode === "high" ? rnd(3, 9) : rnd(2, 9);
     return Math.random() < .5 ? mk("×", a, b) : mk("×", b, a);
   }
@@ -50,8 +55,7 @@
       var d = rnd(3, 9), q = pick(HARD_FACTORS);
       return mk("÷", d * q, d);
     }
-    var tb = c.tMode === "low" ? LOW_TABLES : c.tMode === "high" ? HIGH_TABLES : c.tables;
-    var t = pick(tb);
+    var t = pick(tablesForMode(c));
     var r = c.tMode === "high" ? rnd(3, 9) : rnd(2, 9);
     return mk("÷", t * r, t);
   }
@@ -73,14 +77,14 @@
       var hi = Math.max(q.a, q.b), lo = Math.min(q.a, q.b);
       if (c.tMode === "hard") return hi >= 12 && hi <= 29 && hi % 10 !== 0 && lo >= 3 && lo <= 9;
       if (hi > 9 || lo < 2) return false;
-      var tb = c.tMode === "low" ? LOW_TABLES : c.tMode === "high" ? HIGH_TABLES : c.tables;
+      var tb = tablesForMode(c);
       if (c.tMode === "high" && lo < 3) return false;
       return tb.indexOf(q.a) >= 0 || tb.indexOf(q.b) >= 0;
     }
     var res = q.a / q.b;
     if (c.tMode === "hard") return res >= 12 && res <= 29 && res % 10 !== 0 && q.b >= 3 && q.b <= 9;
     if (res > 9 || q.b > 9 || res < 2) return false;
-    var dtb = c.tMode === "low" ? LOW_TABLES : c.tMode === "high" ? HIGH_TABLES : c.tables;
+    var dtb = tablesForMode(c);
     if (c.tMode === "high" && res < 3) return false;
     return dtb.indexOf(q.b) >= 0;
   }
@@ -208,6 +212,8 @@
       }
       if (VALID_TMODES[c.tMode]) {
         base.cfg.tMode = c.tMode;
+      } else if (sameSet(base.cfg.tables, ALL_TABLES)) {
+        base.cfg.tMode = "all";
       } else if (sameSet(base.cfg.tables, HIGH_TABLES)) {
         base.cfg.tMode = "high";
       } else if (sameSet(base.cfg.tables, LOW_TABLES)) {
@@ -298,7 +304,7 @@
     document.querySelectorAll("#tLevels .level").forEach(function (b) {
       b.setAttribute("aria-checked", b.dataset.v === cfg.tMode ? "true" : "false");
     });
-    var activeTables = cfg.tMode === "low" ? LOW_TABLES : cfg.tMode === "high" ? HIGH_TABLES : cfg.tMode === "hard" ? [] : cfg.tables;
+    var activeTables = cfg.tMode === "hard" ? [] : tablesForMode(cfg);
     document.querySelectorAll("#tables .chip").forEach(function (b) {
       b.setAttribute("aria-pressed", activeTables.indexOf(+b.dataset.v) >= 0 ? "true" : "false");
     });
@@ -369,6 +375,7 @@
     cfg.tMode = b.dataset.v;
     if (cfg.tMode === "low") cfg.tables = LOW_TABLES.slice();
     else if (cfg.tMode === "high") cfg.tables = HIGH_TABLES.slice();
+    else if (cfg.tMode === "all") cfg.tables = ALL_TABLES.slice();
     $("#customTablesAcc").open = false;
     refreshSetup(); save();
   });
@@ -383,6 +390,7 @@
     b.onclick = function () {
       if (cfg.tMode === "low") cfg.tables = LOW_TABLES.slice();
       else if (cfg.tMode === "high") cfg.tables = HIGH_TABLES.slice();
+      else if (cfg.tMode === "all") cfg.tables = ALL_TABLES.slice();
       else if (cfg.tMode === "hard") cfg.tables = [];
       toggle(cfg.tables, n);
       cfg.tables.sort(function (x, y) { return x - y });
