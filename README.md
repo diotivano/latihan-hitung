@@ -1,6 +1,6 @@
 # Latihan Hitung Dasar
 
-Aplikasi latihan hitung dasar (tambah, kurang, kali, bagi) untuk membangun fondasi berhitung cepat sebelum masuk soal TIU SKD CPNS. Berbasis situs statis tanpa build, dirancang **mobile-first** dengan dukungan PWA offline. Semua path bersifat relatif (`./`) sehingga langsung berjalan di GitHub Pages (subpath `/<repo>/` maupun domain utama) dan Netlify.
+Aplikasi latihan hitung dasar (tambah, kurang, kali, bagi) berbasis situs statis tanpa build, dirancang **mobile-first** dengan dukungan PWA offline. Semua path bersifat relatif (`./`) sehingga langsung berjalan di GitHub Pages (subpath `/<repo>/` maupun domain utama) dan Netlify.
 
 ## Struktur File
 - `index.html` — struktur halaman & markup aksesibilitas

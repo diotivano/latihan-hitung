@@ -590,13 +590,13 @@
       tb.hidden = false;
       if (p >= .9 && avg <= 5) {
         tb.className = "target-box ready";
-        tb.textContent = "Target fondasi TIU tercapai (akurasi ≥ 90% dan ≤ 5 detik/soal). Siap naik tingkat!";
+        tb.textContent = "Target tercapai (akurasi ≥ 90% dan ≤ 5 detik/soal). Siap naik tingkat!";
       } else if (p >= .9) {
         tb.className = "target-box";
         tb.textContent = "Akurasi sudah ≥ 90%. Latih rutin agar kecepatan turun di bawah 5 detik/soal.";
       } else {
         tb.className = "target-box";
-        tb.textContent = "Target fondasi TIU: akurasi ≥ 90% dengan rata-rata di bawah 5 detik/soal.";
+        tb.textContent = "Target naik tingkat: akurasi ≥ 90% dengan rata-rata di bawah 5 detik/soal.";
       }
     } else {
       tb.hidden = true;
