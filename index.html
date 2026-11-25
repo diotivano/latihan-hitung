@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Latihan hitung dasar tambah, kurang, kali, dan bagi untuk membangun fondasi cepat sebelum TIU SKD CPNS.">
+<title>Latihan Hitung Dasar</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#1f3a8a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10151f" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="icon" href="./icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main>
+<div class="sheet">
+
+<section id="home">
+  <h1 id="homeTitle" tabindex="-1">Latihan Hitung Dasar</h1>
+  <p class="muted">Fondasi hitung cepat sebelum masuk soal TIU. Mau latihan apa hari ini?</p>
+
+  <button type="button" class="bank-card" id="bankCard" hidden>
+    <div>
+      <strong>Ulangi soal yang pernah salah</strong>
+      <span id="bankCardSub"></span>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </button>
+
+  <div class="topics" id="topics" role="group" aria-label="Pilih jenis latihan">
+    <button type="button" class="topic" data-mode="+">
+      <span class="sym" aria-hidden="true">+</span>
+      <strong>Tambah</strong>
+      <span class="ex">45 + 28</span>
+    </button>
+    <button type="button" class="topic" data-mode="−">
+      <span class="sym" aria-hidden="true">−</span>
+      <strong>Kurang</strong>
+      <span class="ex">45 − 18</span>
+    </button>
+    <button type="button" class="topic" data-mode="×">
+      <span class="sym" aria-hidden="true">×</span>
+      <strong>Kali</strong>
+      <span class="ex">7 × 8</span>
+    </button>
+    <button type="button" class="topic" data-mode="÷">
+      <span class="sym" aria-hidden="true">÷</span>
+      <strong>Bagi</strong>
+      <span class="ex">56 ÷ 7</span>
+    </button>
+  </div>
+
+  <button type="button" class="mix-card" id="openMix">
+    <div>
+      <strong>Latihan campuran</strong>
+      <span>Gabung tambah, kurang, kali, atau bagi</span>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </button>
+
+  <details class="acc" id="statsBox" hidden>
+    <summary>Catatan progres latihan</summary>
+    <div class="acc-body">
+      <ul id="stats"></ul>
+      <p class="muted small" id="bankInfo"></p>
+      <button type="button" class="link" id="reset">Hapus catatan dan soal salah</button>
+    </div>
+  </details>
+</section>
+
+<section id="setup" hidden>
+  <button type="button" class="back-btn" id="backHome">← Ganti latihan</button>
+  <h1 id="setupTitle" tabindex="-1"></h1>
+
+  <div id="mixBox" hidden>
+    <h2 id="opsLabel">Pilih hitungan yang mau digabung</h2>
+    <div class="chips" id="ops" role="group" aria-labelledby="opsLabel"></div>
+  </div>
+
+  <div id="digitsBox" hidden>
+    <h2 id="digitsLabel">Pilih tingkat</h2>
+    <div class="levels" id="digits" role="radiogroup" aria-labelledby="digitsLabel">
+      <button type="button" class="level" role="radio" data-v="1" aria-checked="false">
+        <div><strong>Mudah</strong><span class="desc">Angka kecil sampai 20</span></div>
+        <span class="ex" id="exD1">8 + 7</span>
+      </button>
+      <button type="button" class="level" role="radio" data-v="2" aria-checked="false">
+        <div><strong>Sedang</strong><span class="desc">Angka puluhan</span></div>
+        <span class="ex" id="exD2">45 + 28</span>
+      </button>
+      <button type="button" class="level" role="radio" data-v="3" aria-checked="false">
+        <div><strong>Sulit</strong><span class="desc">Angka ratusan</span></div>
+        <span class="ex" id="exD3">240 + 135</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="tablesBox" hidden>
+    <h2 id="tablesLabel">Pilih tingkat</h2>
+    <div class="levels" id="tLevels" role="radiogroup" aria-labelledby="tablesLabel">
+      <button type="button" class="level" role="radio" data-v="low" aria-checked="false">
+        <div><strong>Mudah</strong><span class="desc">Fondasi angka 2 sampai 5</span></div>
+        <span class="ex" id="exT1">4 × 7</span>
+      </button>
+      <button type="button" class="level" role="radio" data-v="high" aria-checked="false">
+        <div><strong>Sedang</strong><span class="desc">Inti hafalan 6 sampai 9</span></div>
+        <span class="ex" id="exT2">7 × 8</span>
+      </button>
+      <button type="button" class="level" role="radio" data-v="hard" aria-checked="false">
+        <div><strong>Sulit</strong><span class="desc" id="descT3">2 digit × 1 digit (jembatan TIU)</span></div>
+        <span class="ex" id="exT3">16 × 7</span>
+      </button>
+    </div>
+
+    <details class="acc" id="customTablesAcc">
+      <summary id="customTablesSummary">Pilih angka tertentu saja (2–9)</summary>
+      <div class="acc-body">
+        <div class="chips tables" id="tables" role="group" aria-label="Pilih angka tertentu 2 sampai 9"></div>
+      </div>
+    </details>
+  </div>
+
+  <h2 id="countLabel">Mau berapa soal?</h2>
+  <div class="count-row" id="count" role="radiogroup" aria-labelledby="countLabel">
+    <button type="button" class="cnt" role="radio" data-v="10" aria-checked="false">10 soal</button>
+    <button type="button" class="cnt" role="radio" data-v="20" aria-checked="false">20 soal</button>
+    <button type="button" class="cnt" role="radio" data-v="30" aria-checked="false">30 soal</button>
+  </div>
+
+  <p class="hint" id="startHint" hidden></p>
+
+  <div class="actions">
+    <button type="button" class="btn" id="start">Mulai latihan</button>
+  </div>
+</section>
+
+<section id="quiz" hidden>
+  <div class="bar">
+    <span id="num"></span>
+    <button type="button" class="link" id="quit">Selesai</button>
+  </div>
+  <div class="prog" aria-hidden="true"><i id="pbar"></i></div>
+
+  <div class="quiz-body">
+    <div class="muted" id="stname"></div>
+    <div class="q" id="question"></div>
+    <input
+      class="ans"
+      id="answer"
+      type="text"
+      readonly
+      inputmode="none"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
+      placeholder="?"
+      aria-label="Jawabanmu"
+      aria-describedby="question">
+    <div class="fb" id="fb" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="pad" id="pad" role="group" aria-label="Papan angka">
+    <button type="button" class="key" data-k="1">1</button>
+    <button type="button" class="key" data-k="2">2</button>
+    <button type="button" class="key" data-k="3">3</button>
+    <button type="button" class="key" data-k="4">4</button>
+    <button type="button" class="key" data-k="5">5</button>
+    <button type="button" class="key" data-k="6">6</button>
+    <button type="button" class="key" data-k="7">7</button>
+    <button type="button" class="key" data-k="8">8</button>
+    <button type="button" class="key" data-k="9">9</button>
+    <button type="button" class="key del" data-k="del" aria-label="Hapus satu angka">⌫</button>
+    <button type="button" class="key" data-k="0">0</button>
+    <button type="button" class="key go" id="check">Jawab</button>
+  </div>
+  <p class="kb-note">Bisa ketik angka langsung dari keyboard lalu tekan Enter.</p>
+</section>
+
+<section id="result" hidden>
+  <h1 id="resTitle" tabindex="-1">Selesai!</h1>
+  <div class="score" id="final"></div>
+  <p id="meta" class="muted res-meta"></p>
+  <p id="msg" class="res-msg"></p>
+  <div class="target-box" id="targetBox" hidden></div>
+  <div id="wrongBox" hidden>
+    <h2>Soal yang salah</h2>
+    <ul id="wrongList"></ul>
+    <p class="muted small">Soal ini akan otomatis muncul lagi di latihan berikutnya sampai dijawab benar tiga kali.</p>
+  </div>
+  <div class="actions">
+    <button type="button" class="btn warm" id="retryWrong" hidden>Ulangi soal salah</button>
+    <button type="button" class="btn" id="retry">Latihan lagi</button>
+    <button type="button" class="btn alt" id="toHome">Pilih latihan lain</button>
+  </div>
+</section>
+
+</div>
+</main>
+<script src="./app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Latihan Hitung Dasar",
+  "short_name": "Hitung Dasar",
+  "description": "Latihan berhitung tambah, kurang, kali, dan bagi untuk belajar mandiri.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#e6ecf6",
+  "theme_color": "#1f3a8a",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
