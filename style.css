@@ -1,4 +1,5 @@
 :root{
+  color-scheme:only light;
   --page:#e6ecf6;
   --paper:#fbfcfe;
   --line:#d3dff0;
@@ -15,27 +16,6 @@
   --chipfg:#fff;
   --card:rgba(31,58,138,.05);
   --shadow:rgba(20,30,60,.12);
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    color-scheme:dark;
-    --page:#10151f;
-    --paper:#182030;
-    --line:#26324a;
-    --margin:#a85a61;
-    --ink:#9db6ff;
-    --text:#e3e9f5;
-    --muted:#9aa8c4;
-    --ok:#7be0a7;
-    --okbg:#1b3a2b;
-    --bad:#ff9c93;
-    --badbg:#431f1d;
-    --chip:#3a3517;
-    --chipon:#9db6ff;
-    --chipfg:#10151f;
-    --card:rgba(157,182,255,.08);
-    --shadow:rgba(0,0,0,.35);
-  }
 }
 
 *{box-sizing:border-box}

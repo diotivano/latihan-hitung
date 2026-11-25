@@ -1,7 +1,7 @@
 // Service worker: aplikasi bisa dibuka tanpa internet setelah kunjungan pertama.
 // Semua path relatif agar berjalan di GitHub Pages (subpath /<repo>/) maupun domain root.
 // Naikkan nomor VERSION setiap kali index.html, style.css, atau app.js diubah.
-const VERSION = "v12";
+const VERSION = "v13";
 const PREFIX = "hitung-dasar-";
 const CACHE = PREFIX + VERSION;
 const FILES = [
