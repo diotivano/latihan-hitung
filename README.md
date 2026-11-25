@@ -4,7 +4,7 @@ Aplikasi latihan hitung dasar (tambah, kurang, kali, bagi) berbasis situs statis
 
 ## Struktur File
 - `index.html` — struktur halaman & markup aksesibilitas
-- `style.css` — gaya tampilan mobile-first (terang & gelap otomatis)
+- `style.css` — gaya tampilan mobile-first
 - `app.js` — logika latihan, trik hitung cepat, progres lokal, dan registrasi PWA
 - `sw.js` — Service Worker untuk mode offline
 - `manifest.webmanifest`, `icon-192.png`, `icon-512.png` — metadata & ikon PWA
