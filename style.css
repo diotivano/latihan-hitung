@@ -269,7 +269,7 @@ details.acc summary::after{
   transition:transform .15s ease;
 }
 details.acc[open] summary::after{transform:rotate(180deg)}
-details.acc .acc-body{padding:4px 0 10px}
+details.acc .acc-body{padding:6px 0 12px}
 
 /* Screen 2: Setup */
 .back-btn{
@@ -295,6 +295,13 @@ details.acc .acc-body{padding:4px 0 10px}
 }
 .chips.tables{
   grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+.chips.tables .chip{
+  min-width:0;
+  min-height:48px;
+  padding:0;
+  font-size:1.1rem;
 }
 .chip{
   display:flex;
@@ -616,7 +623,8 @@ li{line-height:1.7}
   .topic{min-height:118px}
   .chips{display:flex;flex-wrap:wrap}
   .chips .chip{min-width:104px}
-  .chips.tables{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:280px}
+  .chips.tables{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .chips.tables .chip{min-width:0}
   .actions{flex-direction:row;flex-wrap:wrap}
   .btn{width:auto}
   .pad{max-width:340px;width:100%;margin:12px auto 0}
