@@ -401,12 +401,9 @@
 
   /* --- State sesi kuis & hasil --- */
   var run = null, qs = [], i = 0, score = 0, wrong = [], locked = false, ended = false;
-  var qStart = 0, qElapsed = 0, tSum = 0, autoTimer = null, lockedAt = 0;
-
-  function clearAuto() { if (autoTimer) { clearTimeout(autoTimer); autoTimer = null } }
+  var qStart = 0, qElapsed = 0, tSum = 0, lockedAt = 0;
 
   function renderHome() {
-    clearAuto();
     ended = true; locked = false; qStart = 0;
     var ul = $("#stats"), any = false;
     ul.innerHTML = "";
@@ -458,7 +455,6 @@
   }
 
   function beginSession(questions, label, replaceHist) {
-    clearAuto();
     qs = questions;
     i = 0; score = 0; wrong = []; tSum = 0; ended = false; locked = false;
     $("#stname").textContent = label;
@@ -501,7 +497,6 @@
   }
 
   function ask() {
-    clearAuto();
     locked = false;
     var q = qs[i];
     $("#num").textContent = "Soal " + (i + 1) + " dari " + qs.length;
@@ -560,7 +555,6 @@
       f.textContent = "Benar! " + q.a + " " + q.op + " " + q.b + " = " + r;
       if (data.bank[k]) { data.bank[k].need--; if (data.bank[k].need <= 0) delete data.bank[k] }
       save();
-      autoTimer = setTimeout(function () { if (locked && !ended && qs[i] === q) next() }, 1100);
     } else {
       wrong.push({ q: q, got: v });
       data.bank[k] = { q: mk(q.op, q.a, q.b), need: 3 };
@@ -572,7 +566,6 @@
   }
 
   function next() {
-    clearAuto();
     if (!locked || ended) return;
     locked = false;
     i++;
@@ -581,7 +574,6 @@
   }
 
   function finish(done) {
-    clearAuto();
     if (ended) return;
     ended = true; locked = false; qStart = 0;
     var total = done, p = total ? score / total : 0, avg = total ? (tSum / total / 1000) : 0;
